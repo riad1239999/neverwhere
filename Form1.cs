@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,30 +14,53 @@ using EasyExploits;
 
 namespace NeverwhereInjector1
 {
-
     public partial class Form1 : Form
-
     {
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
-        private static extern IntPtr CreateRoundRectRgn
-    (
-            int nLeftRect,     // x-coordinate of upper-left corner
-            int nTopRect,      // y-coordinate of upper-left corner
-            int nRightRect,    // x-coordinate of lower-right corner
-            int nBottomRect,   // y-coordinate of lower-right corner
-            int nWidthEllipse, // height of ellipse
-            int nHeightEllipse // width of ellipse
-    );
+        private static extern IntPtr CreateRoundRectRgn(
+            int nLeftRect,
+            int nTopRect,
+            int nRightRect,
+            int nBottomRect,
+            int nWidthEllipse,
+            int nHeightEllipse
+        );
 
         EasyExploits.Module NEVERWHERE = new EasyExploits.Module();
+
         public Form1()
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.None;
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
 
+            // Set background color to red
+            this.BackColor = Color.Red;
+
+            // Add "RiadExecuter" label at the top
+            Label titleLabel = new Label();
+            titleLabel.Text = "RiadExecuter";
+            titleLabel.Font = new Font("Segoe UI", 18, FontStyle.Bold);
+            titleLabel.ForeColor = Color.Red;
+            titleLabel.BackColor = Color.Yellow;
+            titleLabel.AutoSize = true;
+            titleLabel.Location = new Point(10, 10);
+            this.Controls.Add(titleLabel);
+
+            // Update all buttons (if already added by InitializeComponent)
+            foreach (Control control in this.Controls)
+            {
+                if (control is Button btn)
+                {
+                    btn.BackColor = Color.Yellow;
+                    btn.ForeColor = Color.Red;
+                    btn.FlatStyle = FlatStyle.Flat;
+                }
+            }
         }
+
         Point lastPoint;
+
         private void button1_Click(object sender, EventArgs e)
         {
             NEVERWHERE.ExecuteScript(scriptBox.Text);
@@ -45,10 +68,7 @@ namespace NeverwhereInjector1
             execButton.FlatAppearance.BorderSize = 0;
         }
 
-        private void button5_Click(object sender, EventArgs e)
-        {
-
-        }
+        private void button5_Click(object sender, EventArgs e) { }
 
         private void button6_Click(object sender, EventArgs e)
         {
@@ -91,7 +111,6 @@ namespace NeverwhereInjector1
         {
             if (e.Button == MouseButtons.Left)
             {
-
                 this.Left += e.X - lastPoint.X;
                 this.Top += e.Y - lastPoint.Y;
             }
@@ -104,7 +123,7 @@ namespace NeverwhereInjector1
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            ScriptList.Items.Clear();//Clear Items in the LuaScriptList
+            ScriptList.Items.Clear();
             Functions.PopulateListBox(ScriptList, "./Scripts", "*.txt");
             Functions.PopulateListBox(ScriptList, "./Scripts", "*.lua");
         }
@@ -119,20 +138,15 @@ namespace NeverwhereInjector1
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
+        private void Form1_Load(object sender, EventArgs e) { }
 
         private void button3_Click_1(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("https://github.com/WooxHimself/neverwhere/blob/main/README.md");
         }
 
-        private void label5_Click(object sender, EventArgs e)
-        {
+        private void label5_Click(object sender, EventArgs e) { }
 
-        }
         class BorderlessButton : Button
         {
             protected override void OnPaint(PaintEventArgs pevent)
@@ -142,10 +156,7 @@ namespace NeverwhereInjector1
             }
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
+        private void pictureBox1_Click(object sender, EventArgs e) { }
 
         private void button2_Click_1(object sender, EventArgs e)
         {
@@ -158,7 +169,6 @@ namespace NeverwhereInjector1
             {
                 process.Kill();
             }
-                //MessageBox.Show("This feature is currenctly disabled due to bugs!", "ERROR");
         }
 
         private void supportButton_Click(object sender, EventArgs e)
@@ -166,15 +176,9 @@ namespace NeverwhereInjector1
             System.Diagnostics.Process.Start("https://dsc.gg/neverwhere");
         }
 
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
+        private void panel2_Paint(object sender, PaintEventArgs e) { }
 
-        }
-
-        private void panel2_MouseEnter(object sender, EventArgs e)
-        {
-
-        }
+        private void panel2_MouseEnter(object sender, EventArgs e) { }
 
         private void button3_Click_2(object sender, EventArgs e)
         {
@@ -182,7 +186,6 @@ namespace NeverwhereInjector1
             {
                 process.Kill();
             }
-            //MessageBox.Show("This feature is currenctly disabled due to bugs!", "ERROR");
         }
     }
 }
